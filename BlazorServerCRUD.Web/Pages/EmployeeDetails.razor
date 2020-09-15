@@ -1,0 +1,41 @@
+﻿@page "/employeedetails/{id}"
+@inject IEmployeeService Service
+<h3>EmployeeDetails</h3>
+
+<div class="row justify content center m.3"> 
+   <div class="col-sm-8">
+       <div class="card">
+           @if(employee!=null){
+           <div class="card-header">
+                <h1>@employee.EmployeeName</h1>
+            </div>
+            <div class="card-body text-center">
+                <h4>Employee ID : @employee.EmployeeID</h4>
+                <h4>Department : @employee.DepartmentID</h4>
+            </div>
+            <div class="card-footer text-center">
+                <button class="btn btn-primary">Back</button>
+                <a class="btn btn-primary" href="updateemployee/@employee.EmployeeID">Edit</a>
+                <button class="btn btn-danger" @onclick="DeleteEmployee">Delete</button>
+            </div>
+           }
+        </div>
+    </div>
+</div>
+
+@code {
+    [Parameter]
+    public string Id { get; set; }
+
+    public Employee employee { get; set; } = new Employee();
+
+    protected override async Task OnInitializedAsync()
+    {
+        employee = await Service.GetEmployee(int.Parse(Id));
+    }
+
+    protected async void DeleteEmployee()
+    {
+        await Service.DeleteEmployee(int.Parse(Id));
+    }
+}

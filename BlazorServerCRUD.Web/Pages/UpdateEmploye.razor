@@ -1,0 +1,20 @@
+﻿@page "/updateemployee/{id}"
+@inject Services.IEmployeeService Service
+<h3>UpdateEmploye</h3>
+@inject Services.IEmployeeService Service
+
+<Form ButtonText="Update Employee" employee="@employee"
+            OnValidSubmit="@UpdateEmployee" />
+@code {
+    [Parameter]
+    public string Id { get; set; }
+    Employee employee = new Employee();
+    protected async override Task OnParametersSetAsync()
+    {
+       employee = await Service.GetEmployee(int.Parse(Id));
+    }
+    async Task UpdateEmployee()
+    {
+        await Service.UpdateEmployee(employee);
+    }
+}
