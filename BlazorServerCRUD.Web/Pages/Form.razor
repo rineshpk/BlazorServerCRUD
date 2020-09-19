@@ -34,7 +34,12 @@
         <div>
             <label>Department :</label>
             <div>
-                <InputNumber @bind-Value="@employee.DepartmentID" class="form-control col-sm-3" />
+                <select @bind="@employee.DepartmentID" class="form-control col-sm-3"> 
+                   <option value=0>--Select--</option>
+                   <option value=1>Admin</option>
+                   <option value=2>HR</option>
+                   <option value=3>Payroll</option>
+                </select>
                 <ValidationMessage For="@(() => employee.DepartmentID)" />
             </div>
         </div>

@@ -34,13 +34,15 @@ namespace BlazorServerCRUD.Api.Models
 
         public async Task<Employee> GetEmployee(int employeeId)
         {
-            var result = await _appDbContext.Employees.FirstOrDefaultAsync(e => e.EmployeeID == employeeId);
+            var result = await _appDbContext.Employees
+            .Include(e => e.Department)
+            .FirstOrDefaultAsync(e => e.EmployeeID == employeeId);
             return result;
         }
 
         public async Task<IEnumerable<Employee>> GetEmployees()
         {
-            return await _appDbContext.Employees.ToListAsync();
+            return await _appDbContext.Employees.Include(e => e.Department).ToListAsync();
         }
 
         public async Task<Employee> UpdateEmployee(Employee employee)

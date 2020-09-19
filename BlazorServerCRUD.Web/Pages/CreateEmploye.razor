@@ -1,5 +1,6 @@
 ﻿@page "/createemployee"
-@inject Services.IEmployeeService Service
+@inject IEmployeeService Service
+@inject NavigationManager navManger
 <h3>CreateEmploye</h3>
 
 <Form ButtonText="Create Employee" employee="@employee"
@@ -10,7 +11,6 @@
     async Task CreateEmployee()
     {
         await Service.AddEmployee(employee);
-        
-        //uriHelper.NavigateTo("developer");
+        navManger.NavigateTo("/");
     }
 }

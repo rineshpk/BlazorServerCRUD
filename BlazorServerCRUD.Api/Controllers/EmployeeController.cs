@@ -32,16 +32,16 @@ namespace BlazorServerCRUD.Api.Controllers
             return Ok(await _employeeRepository.GetEmployee(id));
         }
 
-        [HttpPut]
-        public async Task<ActionResult> UpdateEmployee(Employee employee)
-        {
-            return Ok(await _employeeRepository.UpdateEmployee(employee));
-        }
-
         [HttpPost]
         public async Task<ActionResult> AddEmployee(Employee employee)
         {
             return Ok(await _employeeRepository.AddEmployee(employee));
+        }
+        
+        [HttpPut]
+        public async Task<ActionResult> UpdateEmployee(Employee employee)
+        {
+            return Ok(await _employeeRepository.UpdateEmployee(employee));
         }
 
         [HttpDelete("{id}")]
